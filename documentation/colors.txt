@@ -1,0 +1,61 @@
+
+### 1. Primary Brand & Accent Colors
+* `#7c3aed` — Electric Violet (Primary Accent / Buttons / Active Tabs)
+* `#a78bfa` — Light Violet (Gradient Highlights / 3D Accents)
+* `rgba(124, 58, 237, 0.12)` / `rgba(124, 58, 237, 0.35)` — Violet Dim / Active Borders
+* `#c4b5fd` — Lavender Violet (Cover Badges & Pills)
+
+---
+
+### 2. Status & Risk Signals
+* `#10b981` — Emerald Green (Safe / Legitimate / Tier 1 Auto-Approve)
+* `rgba(16, 185, 129, 0.15)` — Green Dim (Safe Badges / Chart Fills)
+* `#f59e0b` — Amber Gold (Elevated Risk / Tier 2 Step-Up 2FA Challenge)
+* `rgba(245, 158, 11, 0.15)` — Amber Dim (Warning Badges / Chart Fills)
+* `#ef4444` — Crimson Red (Threat Detected / Tier 3 Auto-Block & Freeze)
+* `rgba(239, 68, 68, 0.15)` — Red Dim (Threat Badges / Fraud Chart Fills)
+* `#3b82f6` — Sapphire Blue (Analytics / Secondary Metrics)
+* `rgba(59, 130, 246, 0.15)` — Blue Dim (Secondary Chart Fills)
+
+---
+
+### 3. Backgrounds & Dark Glass UI
+* `#060611` — Deep Obsidian (Main Body Background)
+* `#0b0b1a` — Secondary Dark (Elevated Panels)
+* `rgba(12, 12, 26, 0.75)` — Glass Card Background
+* `rgba(18, 18, 38, 0.85)` — Glass Card Hover Background
+* `rgba(8, 8, 20, 0.90)` — Input & Field Background
+* `rgba(255, 255, 255, 0.04)` — Chart Grid Lines
+* `rgba(255, 255, 255, 0.06)` — Subtle Card Borders
+* `rgba(255, 255, 255, 0.12)` — Border Hover State
+
+---
+
+### 4. Typography & Neutral Tones
+* `#ffffff` — Pure White (Headings & Key Metrics)
+* `#fcfaf8` / `#e2e8f0` — Slate White (Primary UI Text)
+* `#94a3b8` — Slate Silver (Secondary Labels / Chart Text / Muted Text)
+* `#475569` — Dark Slate (Subtle Details & Dim Text)
+* `#334155` — Slate Gray (PDF Body Copy)
+* `#0f172a` — Midnight Dark (PDF Section Headers & Footers)
+
+---
+
+### 5. Forensic Charts (Matplotlib)
+* `#0d1117` — Chart Canvas Background
+* `#161b22` — Chart Axes & Subplot Facecolor
+* `#e6edf3` — Chart Headings & White Labels
+* `#8b949e` — Chart Axis Labels & Gridlines
+* `#ff6b00` — Vivid Cyber Orange (Pre-rendered Chart Bars)
+* `#ff8533` — Bright Orange (Confusion Matrix Highlights)
+* `#fbbf24` — Amber Glow (ROC Curves)
+
+---
+
+### 6. PDF Documentation Badges & Callouts
+* `#f5f3ff` & `#4c1d95` — Purple Callout Background & Text
+* `#ecfdf5` & `#064e3b` — Green Callout Background & Text
+* `#fffbeb` & `#78350f` — Amber Callout Background & Text
+* `#fef2f2` & `#7f1d1d` — Red Callout Background & Text
+* `#f8fafc` & `#e2e8f0` — PDF Card Panels & Borders
+* `#090914`, `#15102a`, `#1e1338` — PDF Cover Page Gradient

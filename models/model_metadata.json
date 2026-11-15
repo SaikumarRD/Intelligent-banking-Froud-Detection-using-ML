@@ -1,0 +1,93 @@
+{
+    "metrics": {
+        "Logistic Regression": {
+            "accuracy": 99.52,
+            "precision": 80.65,
+            "recall": 100.0,
+            "f1": 89.29,
+            "roc_auc": 0.9999,
+            "tn": 9752,
+            "fp": 48,
+            "fn": 0,
+            "tp": 200
+        },
+        "Decision Tree": {
+            "accuracy": 99.97,
+            "precision": 99.5,
+            "recall": 99.0,
+            "f1": 99.25,
+            "roc_auc": 0.9949,
+            "tn": 9799,
+            "fp": 1,
+            "fn": 2,
+            "tp": 198
+        },
+        "Random Forest": {
+            "accuracy": 99.98,
+            "precision": 99.01,
+            "recall": 100.0,
+            "f1": 99.5,
+            "roc_auc": 1.0,
+            "tn": 9798,
+            "fp": 2,
+            "fn": 0,
+            "tp": 200
+        },
+        "Support Vector Machine": {
+            "accuracy": 99.68,
+            "precision": 86.21,
+            "recall": 100.0,
+            "f1": 92.59,
+            "roc_auc": 0.9999,
+            "tn": 9768,
+            "fp": 32,
+            "fn": 0,
+            "tp": 200
+        }
+    },
+    "top_features": [
+        {
+            "Feature": "Channel_Branch",
+            "Importance": 0.5803388973961568
+        },
+        {
+            "Feature": "CustomerAge",
+            "Importance": 1.1227029809255056
+        },
+        {
+            "Feature": "IsWeekend",
+            "Importance": 1.1758087070110776
+        },
+        {
+            "Feature": "DayOfWeek",
+            "Importance": 1.494008070221893
+        },
+        {
+            "Feature": "AccountBalance",
+            "Importance": 2.43367589190769
+        },
+        {
+            "Feature": "TransactionAmount",
+            "Importance": 3.112670435194779
+        },
+        {
+            "Feature": "TransactionDuration",
+            "Importance": 3.8226572167630835
+        },
+        {
+            "Feature": "TransactionHour",
+            "Importance": 13.710801695382942
+        },
+        {
+            "Feature": "LoginAttempts",
+            "Importance": 21.334280198089395
+        },
+        {
+            "Feature": "RiskScore",
+            "Importance": 49.761817178395496
+        }
+    ],
+    "total_records": 50000,
+    "fraud_count": 1000,
+    "legit_count": 49000
+}

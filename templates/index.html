@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sentinel AI — Fraud Intelligence Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="static/style.css" />
+</head>
+<body>
+
+<!-- ═══ Three.js background canvas ═══ -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- ═══ Overlay UI ═══ -->
+<div id="app">
+
+    <!-- ── Top Navigation ── -->
+    <nav id="topnav">
+        <div class="brand">
+            <span class="logo-icon">&#x25C8;</span>
+            <span class="brand-name">SENTINEL AI</span>
+        </div>
+        <div class="nav-links">
+            <a href="#overview">Overview</a>
+            <a href="#detector">Detector</a>
+            <a href="#models">Models</a>
+            <a href="#audit">Audit</a>
+            <a href="#features">Features</a>
+            <a href="#prevention">Strategy</a>
+        </div>
+        <div class="nav-status">
+            <span class="status-dot"></span>
+            <span>System Online</span>
+        </div>
+    </nav>
+
+    <!-- ── Hero ── -->
+    <section id="hero">
+        <div class="hero-content">
+            <p class="hero-kicker">Real‑time ML‑Powered Analysis</p>
+            <h1>Intelligent Fraud<br/>Detection &amp; Prevention</h1>
+            <p class="hero-sub">4 supervised models · 50,000 transactions · 99.98% accuracy · 0 false negatives</p>
+            <a href="#detector" class="btn-primary">Launch Detector &#10140;</a>
+        </div>
+    </section>
+
+    <!-- ── Stats Overview ── -->
+    <section id="overview" class="section">
+        <h2 class="section-title">Dashboard Overview</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-icon">&#x1F4CA;</span>
+                <span class="stat-value" id="stat-total">50,000</span>
+                <span class="stat-label">Transactions Analyzed</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">&#x26A0;</span>
+                <span class="stat-value accent-orange" id="stat-fraud-count">1,000</span>
+                <span class="stat-label">Fraudulent (2.00%)</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">&#x1F3C6;</span>
+                <span class="stat-value accent-green" id="stat-champion">Random Forest</span>
+                <span class="stat-label">Champion Model</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">&#x2705;</span>
+                <span class="stat-value" id="stat-f1">99.50%</span>
+                <span class="stat-label">Best F1‑Score</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Live Detector ── -->
+    <section id="detector" class="section">
+        <h2 class="section-title">Live Transaction Detector</h2>
+        <div class="detector-layout">
+
+            <!-- Form Panel -->
+            <div class="glass-panel detector-form">
+                <h3>Enter Transaction</h3>
+                <form id="predictForm" autocomplete="off">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="f-amount">Amount (&#36;)</label>
+                            <input id="f-amount" type="number" step="0.01" value="4500" />
+                        </div>
+                        <div class="field">
+                            <label for="f-balance">Account Balance</label>
+                            <input id="f-balance" type="number" step="0.01" value="12000" />
+                        </div>
+                        <div class="field">
+                            <label for="f-duration">Duration (sec)</label>
+                            <input id="f-duration" type="number" value="35" />
+                        </div>
+                        <div class="field">
+                            <label for="f-age">Customer Age</label>
+                            <input id="f-age" type="number" value="34" />
+                        </div>
+                        <div class="field">
+                            <label for="f-risk">Risk Score (0–100)</label>
+                            <input id="f-risk" type="number" min="0" max="100" value="45" />
+                        </div>
+                        <div class="field">
+                            <label for="f-login">Login Attempts</label>
+                            <input id="f-login" type="number" min="0" value="1" />
+                        </div>
+                        <div class="field">
+                            <label for="f-type">Transaction Type</label>
+                            <select id="f-type">
+                                <option>Debit</option>
+                                <option>Credit</option>
+                                <option>Transfer</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="f-channel">Channel</label>
+                            <select id="f-channel">
+                                <option>Online</option>
+                                <option>ATM</option>
+                                <option>Branch</option>
+                                <option>Mobile</option>
+                            </select>
+                        </div>
+                        <div class="field full-width">
+                            <label for="f-model">Active Model</label>
+                            <select id="f-model">
+                                <option>Random Forest</option>
+                                <option>Decision Tree</option>
+                                <option>Logistic Regression</option>
+                                <option>Support Vector Machine</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary btn-block">Analyze Transaction &#x2192;</button>
+                </form>
+            </div>
+
+            <!-- Result Panel -->
+            <div class="glass-panel detector-result" id="resultPanel">
+                <div class="result-idle" id="resultIdle">
+                    <div class="orb-placeholder"></div>
+                    <p>Submit a transaction to see the risk analysis</p>
+                </div>
+                <div class="result-data hidden" id="resultData">
+                    <div class="risk-orb-wrap">
+                        <canvas id="orb-canvas" width="220" height="220"></canvas>
+                    </div>
+                    <div class="result-badge" id="resultBadge">—</div>
+                    <div class="result-prob" id="resultProb">—</div>
+                    <div class="result-tier" id="resultTier">—</div>
+                    <div class="result-action" id="resultAction">—</div>
+                    <div class="result-desc" id="resultDesc">—</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Model Comparison ── -->
+    <section id="models" class="section">
+        <h2 class="section-title">Model Comparison</h2>
+        <div class="models-grid" id="modelsGrid">
+            <!-- Cards injected by JS -->
+        </div>
+        <div class="glass-panel accuracy-paradox">
+            <h3>&#x26A0; The Accuracy Paradox</h3>
+            <p>A naive model that marks <strong>every</strong> transaction as legitimate achieves <strong class="accent-orange">98.00% accuracy</strong> — yet catches <strong class="accent-red">zero</strong> of the 1,000 frauds. In contrast, Sentinel's Random Forest achieves <strong class="accent-green">100% fraud recall</strong> with only 2 false positives.</p>
+            <div class="paradox-bars">
+                <div class="paradox-row">
+                    <span class="paradox-label">Naive Baseline</span>
+                    <div class="paradox-bar">
+                        <div class="pb-fill pb-acc" style="width:98%"><span>98% Acc</span></div>
+                        <div class="pb-fill pb-rec" style="width:0%"><span>0% Recall</span></div>
+                    </div>
+                </div>
+                <div class="paradox-row">
+                    <span class="paradox-label">Random Forest</span>
+                    <div class="paradox-bar">
+                        <div class="pb-fill pb-acc" style="width:99.98%"><span>99.98%</span></div>
+                        <div class="pb-fill pb-rec" style="width:100%"><span>100% Recall</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Batch Audit ── -->
+    <section id="audit" class="section">
+        <h2 class="section-title">Batch CSV Audit</h2>
+        <div class="glass-panel audit-panel">
+            <div class="upload-zone" id="uploadZone">
+                <span class="upload-icon">&#x1F4C1;</span>
+                <p>Drag &amp; drop a CSV file here or <label for="csvFile" class="upload-link">browse</label></p>
+                <input type="file" id="csvFile" accept=".csv" hidden />
+                <small>Supports up to 200 rows per batch · Uses the selected model</small>
+            </div>
+            <div class="audit-controls">
+                <select id="audit-model">
+                    <option>Random Forest</option>
+                    <option>Decision Tree</option>
+                    <option>Logistic Regression</option>
+                    <option>Support Vector Machine</option>
+                </select>
+                <button id="auditBtn" class="btn-secondary" disabled>Run Audit</button>
+            </div>
+            <div class="audit-summary hidden" id="auditSummary">
+                <div class="audit-stat"><span id="a-total">—</span><small>Processed</small></div>
+                <div class="audit-stat accent-red"><span id="a-fraud">—</span><small>Fraud</small></div>
+                <div class="audit-stat accent-green"><span id="a-legit">—</span><small>Legitimate</small></div>
+                <div class="audit-stat accent-orange"><span id="a-rate">—</span><small>Fraud Rate</small></div>
+            </div>
+            <div class="audit-table-wrap hidden" id="auditTableWrap">
+                <table class="audit-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th><th>Amount</th><th>Channel</th><th>Risk%</th><th>Verdict</th><th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="auditTbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Feature Importance ── -->
+    <section id="features" class="section">
+        <h2 class="section-title">Top Fraud Predictors</h2>
+        <div class="glass-panel features-panel">
+            <div class="feature-bars" id="featureBars">
+                <!-- Injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Prevention Strategy ── -->
+    <section id="prevention" class="section">
+        <h2 class="section-title">3‑Tier Prevention Strategy</h2>
+        <div class="tiers-grid">
+            <div class="tier-card tier-low">
+                <div class="tier-num">1</div>
+                <h3>Low Risk</h3>
+                <p class="tier-range">Probability &lt; 0.25</p>
+                <p class="tier-action accent-green">AUTO‑APPROVE</p>
+                <p>Instant cryptographic verification (&lt;15 ms). Transaction authorized and logged seamlessly.</p>
+            </div>
+            <div class="tier-card tier-med">
+                <div class="tier-num">2</div>
+                <h3>Medium Risk</h3>
+                <p class="tier-range">0.25 ≤ Probability &lt; 0.65</p>
+                <p class="tier-action accent-orange">CHALLENGE 2FA</p>
+                <p>Step-up authentication required — SMS OTP, push notification, or biometric FaceID before authorization.</p>
+            </div>
+            <div class="tier-card tier-high">
+                <div class="tier-num">3</div>
+                <h3>High Risk</h3>
+                <p class="tier-range">Probability ≥ 0.65</p>
+                <p class="tier-action accent-red">AUTO‑BLOCK &amp; FREEZE</p>
+                <p>Transaction halted. Account credentials locked. Alert dispatched to Fraud Operations &amp; cardholder.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Footer ── -->
+    <footer id="site-footer">
+        <p>Sentinel AI · Intelligent Banking Fraud Detection &amp; Prevention System · Built with Three.js &amp; Flask</p>
+    </footer>
+</div>
+
+<!-- Three.js (use local vendor copy, fallback to CDN) -->
+<script src="static/vendor/three.min.js"></script>
+<script>
+    if (typeof THREE === 'undefined') {
+        var s = document.createElement('script');
+        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js';
+        s.onload = function(){ initScene(); };
+        document.head.appendChild(s);
+    }
+</script>
+<script src="static/script.js"></script>
+</body>
+</html>

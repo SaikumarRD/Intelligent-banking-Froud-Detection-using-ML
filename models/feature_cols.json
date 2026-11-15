@@ -1,0 +1,1 @@
+["TransactionAmount", "CustomerAge", "TransactionDuration", "LoginAttempts", "AccountBalance", "RiskScore", "TransactionHour", "DayOfWeek", "IsWeekend", "TransactionType_Debit", "Channel_Branch", "Channel_Online", "CustomerOccupation_Engineer", "CustomerOccupation_Retired", "CustomerOccupation_Student"]
