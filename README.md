@@ -33,27 +33,6 @@ Modern retail banking environments face high-velocity cyber threats where **frau
 
 ---
 
-## 📸 System Visual Gallery
-
-<div align="center">
-
-### 🌐 Modern Minimalist 3D Command Deck & Forensic Suite
-| 3D Command Deck (Three.js) | Real-Time Transaction Detector |
-| :---: | :---: |
-| <img src="documentation/screenshots/dashboard.png" width="480" alt="Dashboard" /> | <img src="documentation/screenshots/detector.png" width="480" alt="Detector" /> |
-
-| Model Performance Benchmark | Confusion Matrices (FP vs FN) |
-| :---: | :---: |
-| <img src="static/charts/3_model_comparison.png" width="480" alt="Model Comparison" /> | <img src="static/charts/4_confusion_matrices.png" width="480" alt="Confusion Matrices" /> |
-
-| The Accuracy Paradox Exposed | Gini Feature Importances |
-| :---: | :---: |
-| <img src="static/charts/2_accuracy_paradox.png" width="480" alt="Accuracy Paradox" /> | <img src="static/charts/6_feature_importance.png" width="480" alt="Feature Importance" /> |
-
-</div>
-
----
-
 ## ⚡ The Accuracy Paradox
 
 > *"Why is 98% accuracy catastrophic in banking fraud detection?"*
@@ -81,10 +60,6 @@ To counter the extreme 98:2 imbalance without synthesizing false signals in prod
 1. **Stratified Splitting**: 50,000 transactions partitioned into 80% Train (40,000) and 20% Test (10,000) preserving natural ratios.
 2. **SMOTE (Synthetic Minority Over-sampling Technique)**: Applied strictly to the training fold (`X_train`), interpolating k-nearest neighbors to balance minority samples ($39,200 \times 39,200$).
 3. **No Data Leakage**: The holdout test set (10,000 transactions; 9,800 legit, 200 fraud) remains untouched with its original, unaltered imbalanced distribution.
-
-<div align="center">
-  <img src="static/charts/1_class_imbalance_smote.png" width="750" alt="SMOTE Balancing" />
-</div>
 
 ---
 
@@ -263,17 +238,6 @@ You can test the **Batch CSV Audit** tab by uploading any of the stress test CSV
 * `atm_withdrawal_anomalies_7000.csv` (Off-hour rapid ATM cash-out anomalies)
 * `card_not_present_fraud_6000.csv` (Card-not-present online skimming simulation)
 * `mixed_fraud_stress_test_10000.csv` (Mixed multi-vector stress test)
-
----
-
-## 🎓 Academic Attribution & Credits
-
-* **Institution**: GM University, Davanagere – 577006, Karnataka
-* **Program**: PG Diploma in AI & IoT with Intel
-* **Module**: Module 2 – Intelligent Banking Fraud Detection and Prevention System
-* **Author**: SAIKUMAR ([@SaikumarRD](https://github.com/SaikumarRD))
-* **Academic Year**: 2026–2027
-* **Program Guidance**: Ms. Anusha N L / Ms. Jayalaxmi N S | **Program Director**: Dr. Asha K
 
 ---
 
